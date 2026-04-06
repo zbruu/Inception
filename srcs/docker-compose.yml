@@ -1,5 +1,7 @@
 version: '3.8'
 
+#services: list of all containers
+
 services:
   nginx:
     build: ./requirements/nginx
@@ -7,4 +9,18 @@ services:
     ports:
       - "443:443"
     restart: always
+    networks:
+      - inception
+
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - inception
+
+networks:
+    inception:
 
