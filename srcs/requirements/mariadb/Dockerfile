@@ -13,4 +13,3 @@ RUN chmod +x /init.sh
 EXPOSE 3306
 
 CMD ["bash", "/init.sh"]
-
