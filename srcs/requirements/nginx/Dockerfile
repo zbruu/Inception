@@ -55,4 +55,3 @@ CMD ["nginx", "-g", "daemon off;"]
 #9. lance nginx
 #=> Quand je build, j'obtiens une image avec debian + nginx + SSL + ma config:
 # Nginx HTTPS actif sur port 443
-

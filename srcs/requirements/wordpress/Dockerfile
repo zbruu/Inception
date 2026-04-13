@@ -4,7 +4,15 @@ RUN	apt update && apt install -y \
 	php-fpm \
 	php-mysql \
 	wget \
-	curl
+	curl \
+	default-mysql-client
+
+# WP-cli
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+&& chmod +x wp-cli.phar \
+&& mv wp-cli.phar /usr/local/bin/wp
+
+RUN	mkdir -p /run/php
 
 # Download WordPress
 RUN	wget https://wordpress.org/latest.tar.gz \
