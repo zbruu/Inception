@@ -13,7 +13,8 @@ re:
 clean:
 	docker system prune -af
 
-fclean: clean
+fclean: down clean
+	docker volume prune -f
 	su -c "rm -rf /home/bde-la-p/data/db /home/bde-la-p/data/wp"
 
 .PHONY: all down re clean fclean
