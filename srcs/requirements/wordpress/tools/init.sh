@@ -2,6 +2,15 @@
 
 set -e
 
+# Downloads WordPress if absent
+if [ ! -f /var/www/html/wp-login.php ]; then
+	wget https://wordpress.org/latest.tar.gz -P /tmp
+	tar -xvf /tmp/latest.tar.gz -C /tmp
+	mv /tmp/wordpress/* /var/www/html
+	rm -rf /tmp/wordpress /tmp/latest.tar.gz
+	chown -R www-data:www-data /var/www/html
+fi
+
 cd /var/www/html
 
 # Create a wp-config.php if absent

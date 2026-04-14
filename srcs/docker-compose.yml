@@ -13,6 +13,8 @@ services:
     restart: always
     networks:
       - inception
+    volumes:
+      - wordpress:/var/www/html
 
   mariadb:
     build: ./requirements/mariadb
@@ -33,6 +35,23 @@ services:
     restart: always
     networks:
       - inception
+    volumes:
+      - wordpress:/var/www/html
 
 networks:
     inception:
+
+volumes:
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/bde-la-p/data/db
+
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/bde-la-p/data/wp
