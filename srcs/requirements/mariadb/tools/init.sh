@@ -2,6 +2,9 @@
 
 set -x
 
+MYSQL_PASSWORD=$(cat /run/secrets/db_password | tr -d '\n\r')
+MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password | tr -d '\n\r')
+
 mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
 mysqld_safe --datadir=/var/lib/mysql --user=mysql &

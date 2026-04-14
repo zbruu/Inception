@@ -2,9 +2,13 @@
 
 set -e
 
+MYSQL_PASSWORD=$(cat /run/secrets/db_password | tr -d '\n\r')
+WP_ADMIN_PASSWORD=$(cat /run/secrets/credentials | tr -d '\n\r')
+WP_USER_PASSWORD=$(cat /run/secrets/credentials | tr -d '\n\r')
+
 # Downloads WordPress if absent
 if [ ! -f /var/www/html/wp-login.php ]; then
-	wget https://wordpress.org/wordpress-6.4.3.tar.gz -P /tmp
+	wget https://wordpress.org/latest.tar.gz -P /tmp
 	tar -xvf /tmp/latest.tar.gz -C /tmp
 	mv /tmp/wordpress/* /var/www/html
 	rm -rf /tmp/wordpress /tmp/latest.tar.gz
@@ -50,4 +54,3 @@ fi
 
 # Launch php-fpm (replaces bash and becomes PID 1)
 exec php-fpm7.4 -F
-

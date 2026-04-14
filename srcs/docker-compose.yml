@@ -1,5 +1,13 @@
 version: '3.8'
 
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  credentials:
+    file: ../secrets/credentials.txt
+
 #services: list of all containers
 
 services:
@@ -24,6 +32,11 @@ services:
     restart: always
     networks:
       - inception
+    volumes:
+      - mariadb:/var/lib/mysql
+    secrets:
+      - db_password
+      - db_root_password
 
   wordpress:
     build: ./requirements/wordpress
@@ -37,6 +50,9 @@ services:
       - inception
     volumes:
       - wordpress:/var/www/html
+    secrets:
+      - db_password
+      - credentials
 
 networks:
     inception:
